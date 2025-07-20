@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>History - My Finance Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1 class="logo">💰 My Finance Tracker</h1>
+    <nav class="nav-buttons">
+      <a href="data-input.html" class="button small-button">Edit Data</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Transaction History</h2>
+    
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by category, note, or date...">
+    </div>
+
+    <div class="table-container">
+      <table id="historyTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount ($)</th>
+            <th>Note</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <!-- Populated via JS -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    const historyBody = document.getElementById("historyBody");
+    const searchInput = document.getElementById("searchInput");
+    let deletedItems = [];
+
+    function loadHistory() {
+      const data = JSON.parse(localStorage.getItem("financeData")) || [];
+      renderTable(data);
+    }
+
+    function renderTable(data) {
+      historyBody.innerHTML = "";
+      data.forEach((entry, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${entry.date}</td>
+          <td>${entry.type}</td>
+          <td>${entry.category}</td>
+          <td>${parseFloat(entry.amount).toFixed(2)}</td>
+          <td>${entry.note}</td>
+          <td>
+            <button class="button small-button danger" onclick="deleteEntry(${index})">Delete</button>
+          </td>
+        `;
+        historyBody.appendChild(row);
+      });
+    }
+
+    function deleteEntry(index) {
+      const data = JSON.parse(localStorage.getItem("financeData")) || [];
+      const deleted = data.splice(index, 1)[0];
+      deletedItems.push({ item: deleted, index });
+      localStorage.setItem("financeData", JSON.stringify(data));
+      renderTable(data);
+      showRecallButton();
+    }
+
+    function showRecallButton() {
+      if (!document.getElementById("recallButton")) {
+        const btn = document.createElement("button");
+        btn.id = "recallButton";
+        btn.className = "button small-button recall";
+        btn.innerText = "Recall Delete";
+        btn.onclick = recallDelete;
+        document.querySelector(".container").appendChild(btn);
+      }
+    }
+
+    function recallDelete() {
+      const data = JSON.parse(localStorage.getItem("financeData")) || [];
+      const lastDeleted = deletedItems.pop();
+      if (lastDeleted) {
+        data.splice(lastDeleted.index, 0, lastDeleted.item);
+        localStorage.setItem("financeData", JSON.stringify(data));
+        renderTable(data);
+      }
+      if (deletedItems.length === 0) {
+        document.getElementById("recallButton")?.remove();
+      }
+    }
+
+    searchInput.addEventListener("input", () => {
+      const keyword = searchInput.value.toLowerCase();
+      const data = JSON.parse(localStorage.getItem("financeData")) || [];
+      const filtered = data.filter(entry =>
+        entry.category.toLowerCase().includes(keyword) ||
+        entry.note.toLowerCase().includes(keyword) ||
+        entry.date.toLowerCase().includes(keyword)
+      );
+      renderTable(filtered);
+    });
+
+    loadHistory();
+  </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Input - VisualBudget</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="auth-body">
+  <div class="container">
+    <header class="header">
+      <h1><a href="index.html">VisualBudget</a></h1>
+    </header>
+
+    <main class="main-section">
+      <div class="summary">
+        <h2>Date: <span id="current-date"></span></h2>
+        <h3>User: John Doe</h3>
+        <h3>Total Income: $<span id="total-income">0</span></h3>
+        <h3>Total Spending: $<span id="total-spending">0</span></h3>
+        <h3 class="asset asset-zero" id="asset-display">$0.00</h3>
+      </div>
+
+      <section id="income-section" class="section">
+        <div class="action-buttons">
+          <button id="add-income" class="btn">Add Income</button>
+        </div>
+        <div id="income-rows"></div>
+      </section>
+
+      <section id="spending-section" class="section">
+        <div class="action-buttons">
+          <button id="add-spending" class="btn">Add Spending</button>
+        </div>
+        <div id="spending-rows"></div>
+      </section>
+
+      <div class="bottom-buttons">
+        <button id="submit-btn" class="btn small-btn">Submit</button>
+        <button id="history-btn" class="btn small-btn">View History Records</button>
+      </div>
+
+      <div class="visualize-container">
+        <button id="visualize-btn" class="btn">Visualize My Data</button>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer" >
+    <button onclick="toggleContacts()">Contact Us</button>
+    <ul id="contact-list" class="contact-list">
+      <li><strong>Jessy Seo</strong> — seo00029@algonquinlive.com</li>
+      <li><strong>Yuanyuan Xi</strong> — xi000016@algonquinlive.com</li>
+      <li><strong>Kang Tian</strong> — tian0063@algonquinlive.com</li>
+    </ul>
+  </footer>
+
+  <script>
+    // Set current date
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString();
+
+    function updateTotalsLive() {
+      const incomeRows = document.querySelectorAll('#income-rows .input-row');
+      const spendingRows = document.querySelectorAll('#spending-rows .input-row');
+
+      let totalIncome = 0;
+      let totalSpending = 0;
+
+      function sumAmounts(rows) {
+        let sum = 0;
+        rows.forEach(row => {
+          const val = parseFloat(row.querySelector('.entry-amount').value);
+          if (!isNaN(val) && val > 0) sum += val;
+        });
+        return sum;
+      }
+
+      totalIncome = sumAmounts(incomeRows);
+      totalSpending = sumAmounts(spendingRows);
+
+      document.getElementById('total-income').textContent = totalIncome.toFixed(2);
+      document.getElementById('total-spending').textContent = totalSpending.toFixed(2);
+
+      const net = totalIncome - totalSpending;
+      const assetElem = document.getElementById('asset-display');
+      assetElem.textContent = '$' + net.toFixed(2);
+      assetElem.className = 'asset ' + (net > 0 ? 'asset-positive' : net < 0 ? 'asset-negative' : 'asset-zero');
+    }
+
+    function createRow(type) {
+      const container = document.getElementById(type + '-rows');
+      const row = document.createElement('div');
+      row.className = 'input-row';
+
+      const categories = {
+        income: ["Job", "Stock", "Fund", "Interest", "Gift", "Rental", "Bonus", "Other"],
+        spending: ["Transport", "Food", "Clothes", "Entertainment", "Medical", "Education", "Rent", "Subscription", "Utilities", "Other"]
+      };
+
+      const select = document.createElement('select');
+      select.className = 'entry-category';
+      categories[type].forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+      });
+
+      const amount = document.createElement('input');
+      amount.type = 'number';
+      amount.min = '0';
+      amount.step = '0.01';
+      amount.placeholder = 'Amount';
+      amount.className = 'entry-amount';
+
+      // Update totals live on input change
+      amount.addEventListener('input', () => {
+        updateTotalsLive();
+      });
+
+      const note = document.createElement('input');
+      note.type = 'text';
+      note.placeholder = 'Note';
+      note.className = 'entry-note';
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'delete-btn';
+      deleteBtn.textContent = 'Delete';
+
+      row.appendChild(select);
+      row.appendChild(amount);
+      row.appendChild(note);
+      row.appendChild(deleteBtn);
+
+      container.appendChild(row);
+
+      deleteBtn.addEventListener('click', () => {
+        container.removeChild(row);
+        updateTotalsLive(); // update totals after deletion
+      });
+    }
+
+    function collectDataAndUpdateTotals() {
+      const incomeRows = document.querySelectorAll('#income-rows .input-row');
+      const spendingRows = document.querySelectorAll('#spending-rows .input-row');
+
+      let totalIncome = 0;
+      let totalSpending = 0;
+
+      const incomeEntries = [];
+      const spendingEntries = [];
+
+      function parseRow(row) {
+        const category = row.querySelector('.entry-category').value;
+        const amountInput = row.querySelector('.entry-amount');
+        const noteInput = row.querySelector('.entry-note');
+        const amount = parseFloat(amountInput.value);
+        const note = noteInput.value.trim();
+        return { category, amount, note };
+      }
+
+      for (const row of incomeRows) {
+        const { category, amount, note } = parseRow(row);
+        if (!isNaN(amount) && amount > 0) {
+          totalIncome += amount;
+          incomeEntries.push({ category, amount, note });
+        }
+      }
+
+      for (const row of spendingRows) {
+        const { category, amount, note } = parseRow(row);
+        if (!isNaN(amount) && amount > 0) {
+          totalSpending += amount;
+          spendingEntries.push({ category, amount, note });
+        }
+      }
+
+      document.getElementById('total-income').textContent = totalIncome.toFixed(2);
+      document.getElementById('total-spending').textContent = totalSpending.toFixed(2);
+
+      const net = totalIncome - totalSpending;
+      const assetElem = document.getElementById('asset-display');
+      assetElem.textContent = '$' + net.toFixed(2);
+      assetElem.className = 'asset ' + (net > 0 ? 'asset-positive' : net < 0 ? 'asset-negative' : 'asset-zero');
+
+      const date = document.getElementById('current-date').textContent;
+      const user = "John Doe";
+
+      const dataToStore = {
+        date,
+        user,
+        income: incomeEntries,
+        spending: spendingEntries,
+        totalIncome,
+        totalSpending,
+        net,
+      };
+
+      let history = JSON.parse(localStorage.getItem('visualBudgetHistory') || '[]');
+      history.push(dataToStore);
+      localStorage.setItem('visualBudgetHistory', JSON.stringify(history));
+    }
+
+    document.getElementById('add-income').addEventListener('click', () => createRow('income'));
+    document.getElementById('add-spending').addEventListener('click', () => createRow('spending'));
+
+    document.getElementById('submit-btn').addEventListener('click', () => {
+      collectDataAndUpdateTotals();
+
+      alert('Data submitted and stored!');
+
+      document.getElementById('income-rows').innerHTML = '';
+      document.getElementById('spending-rows').innerHTML = '';
+      document.getElementById('total-income').textContent = '0.00';
+      document.getElementById('total-spending').textContent = '0.00';
+      const assetElem = document.getElementById('asset-display');
+      assetElem.textContent = '$0.00';
+      assetElem.className = 'asset asset-zero';
+    });
+
+    document.getElementById('visualize-btn').addEventListener('click', () => {
+      window.location.href = 'dashboard.html';
+    });
+
+    document.getElementById('history-btn').addEventListener('click', () => {
+      window.location.href = 'history.html';
+    });
+
+    function toggleContacts() {
+      document.getElementById('contact-list').classList.toggle('visible');
+    }
+  </script>
+</body>
+</html>
