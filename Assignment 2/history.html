@@ -7,21 +7,20 @@
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
+<body id="history-page">
+  <div class="history-container">
   <header class="header">
-    <h1 class="logo">💰 My Finance Tracker</h1>
+    <h1 class="logo">Transaction History</a></h1>
     <nav class="nav-buttons">
-      <a href="data-input.html" class="button small-button">Edit Data</a>
+      <a href="data_input.html" class="button small-button">Insert New Data</a>
+      <a href="dashboard.html" class="button small-button">View Dashboard</a>
     </nav>
   </header>
-
+  </div>
   <main class="container">
-    <h2>Transaction History</h2>
-    
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search by category, note, or date...">
     </div>
-
     <div class="table-container">
       <table id="historyTable">
         <thead>
@@ -48,7 +47,8 @@
 
     function loadHistory() {
       const data = JSON.parse(localStorage.getItem("financeData")) || [];
-      renderTable(data);
+      const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+      renderTable(sorted);
     }
 
     function renderTable(data) {
@@ -56,17 +56,36 @@
       data.forEach((entry, index) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-          <td>${entry.date}</td>
-          <td>${entry.type}</td>
-          <td>${entry.category}</td>
-          <td>${parseFloat(entry.amount).toFixed(2)}</td>
-          <td>${entry.note}</td>
+          <td contenteditable="true">${entry.date}</td>
+          <td contenteditable="true">${entry.type}</td>
+          <td contenteditable="true">${entry.category}</td>
+          <td contenteditable="true">${parseFloat(entry.amount).toFixed(2)}</td>
+          <td contenteditable="true">${entry.note}</td>
           <td>
+            <button class="button small-button edit" onclick="editEntry(${index}, this)">Edit</button>
             <button class="button small-button danger" onclick="deleteEntry(${index})">Delete</button>
           </td>
         `;
+        row.classList.add("editable-row");
         historyBody.appendChild(row);
       });
+    }
+
+    function editEntry(index, button) {
+      const row = button.closest("tr");
+      const cells = row.querySelectorAll("td");
+      const updated = {
+        date: cells[0].innerText,
+        type: cells[1].innerText,
+        category: cells[2].innerText,
+        amount: parseFloat(cells[3].innerText),
+        note: cells[4].innerText
+      };
+
+      const data = JSON.parse(localStorage.getItem("financeData")) || [];
+      data[index] = updated;
+      localStorage.setItem("financeData", JSON.stringify(data));
+      loadHistory();
     }
 
     function deleteEntry(index) {

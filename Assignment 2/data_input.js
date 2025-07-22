@@ -1,137 +1,219 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("current-date").textContent = today;
-  
-    const incomeBtn = document.getElementById("add-income");
-    const spendingBtn = document.getElementById("add-spending");
-    const entriesContainer = document.getElementById("entries-container");
-    const submitBtn = document.getElementById("submit-btn");
-  
-    let totalIncome = 0;
-    let totalSpending = 0;
-  
-    function updateSummary() {
-      document.getElementById("total-income").textContent = totalIncome.toFixed(2);
-      document.getElementById("total-spending").textContent = totalSpending.toFixed(2);
-      const asset = totalIncome - totalSpending;
-      const assetText = document.getElementById("net-asset");
-      assetText.textContent = asset.toFixed(2);
-  
-      if (asset > 0) {
-        assetText.style.color = "green";
-      } else if (asset < 0) {
-        assetText.style.color = "red";
-      } else {
-        assetText.style.color = "darkgray";
-      }
-    }
-  
-    function createRow(type) {
-      const row = document.createElement("div");
-      row.classList.add("entry-row");
-  
-      const categorySelect = document.createElement("select");
-      categorySelect.name = "category";
-      categorySelect.innerHTML = (type === "income")
-        ? `
-          <option>Job</option>
-          <option>Stock</option>
-          <option>Fund</option>
-          <option>Interest</option>
-          <option>Side Hustle</option>
-          <option>Gift</option>
-          <option>Other</option>`
-        : `
-          <option>Transport</option>
-          <option>Food</option>
-          <option>Clothing</option>
-          <option>Entertainment</option>
-          <option>Medical</option>
-          <option>Housing</option>
-          <option>Utilities</option>
-          <option>Education</option>
-          <option>Gift</option>
-          <option>Other</option>`;
-  
-      const amountInput = document.createElement("input");
-      amountInput.type = "number";
-      amountInput.placeholder = "Amount";
-      amountInput.classList.add("amount-input");
-  
-      const noteInput = document.createElement("input");
-      noteInput.type = "text";
-      noteInput.placeholder = "Notes";
-      noteInput.classList.add("note-input");
-  
-      const okBtn = document.createElement("button");
-      okBtn.textContent = "OK";
-      okBtn.classList.add("ok-btn");
-  
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Delete";
-      delBtn.classList.add("delete-btn");
-  
-      okBtn.addEventListener("click", function () {
-        const amount = parseFloat(amountInput.value);
-        if (isNaN(amount) || amount <= 0) {
-          alert("Please enter a valid amount.");
-          return;
-        }
-  
-        // Update totals
-        if (type === "income") {
-          totalIncome += amount;
-        } else {
-          totalSpending += amount;
-        }
-        updateSummary();
-  
-        // Lock row
-        categorySelect.disabled = true;
-        amountInput.disabled = true;
-        noteInput.disabled = true;
-        okBtn.disabled = true;
-      });
-  
-      delBtn.addEventListener("click", function () {
-        // If row was confirmed before deletion, subtract amount
-        if (okBtn.disabled) {
-          const amount = parseFloat(amountInput.value);
-          if (type === "income") {
-            totalIncome -= amount;
-          } else {
-            totalSpending -= amount;
-          }
-          updateSummary();
-        }
-        row.remove();
-      });
-  
-      row.appendChild(categorySelect);
-      row.appendChild(amountInput);
-      row.appendChild(noteInput);
-      row.appendChild(okBtn);
-      row.appendChild(delBtn);
-  
-      entriesContainer.appendChild(row);
-    }
-  
-    incomeBtn.addEventListener("click", function () {
-      createRow("income");
-    });
-  
-    spendingBtn.addEventListener("click", function () {
-      createRow("spending");
-    });
-  
-    submitBtn.addEventListener("click", function () {
-      // In the future, this is where you'd send the data to MySQL
-      alert("Data submitted!");
-      entriesContainer.innerHTML = "";
-      totalIncome = 0;
-      totalSpending = 0;
-      updateSummary();
-    });
-  
-    updateSummary();
+  // Cache elements
+  // Use ISO string format to set date input value properly
+  const today = new Date().toISOString().split("T")[0];
+  const dateInput = document.getElementById("entry-date");
+  dateInput.value = today;
+
+  // Track if user manually changed the date
+  let dateManuallyChanged = false;
+  dateInput.addEventListener("change", () => {
+    dateManuallyChanged = true;
   });
+
+  const incomeBtn = document.getElementById("add-income");
+  const spendingBtn = document.getElementById("add-spending");
+  const incomeContainer = document.getElementById("income-rows");
+  const spendingContainer = document.getElementById("spending-rows");
+  const submitBtn = document.getElementById("submit-btn");
+  const errorBanner = document.getElementById("error-banner");
+
+  // Step 1: Create success banner element dynamically and insert it just after error banner
+  const successBanner = document.createElement("div");
+  successBanner.id = "success-banner";
+  successBanner.style.display = "none";
+  successBanner.style.color = "green";
+  successBanner.style.textAlign = "center";
+  successBanner.style.marginTop = "10px";
+  successBanner.style.fontWeight = "bold";
+  errorBanner.parentNode.insertBefore(successBanner, errorBanner.nextSibling);
+
+  let hasUnsavedData = false;
+
+  function showError(msg) {
+    errorBanner.textContent = msg;
+    errorBanner.style.color = "red";
+    errorBanner.style.display = "block";
+    setTimeout(() => {
+      errorBanner.style.display = "none";
+    }, 4000);
+  }
+
+  function showSuccess(msg) {
+    successBanner.textContent = msg;
+    successBanner.style.display = "block";
+    setTimeout(() => {
+      successBanner.style.display = "none";
+    }, 4000);
+  }
+
+  function updateTotalsLive() {
+    const _sum = (rows) =>
+      Array.from(rows).reduce((acc, r) => {
+        const v = parseFloat(r.querySelector(".entry-amount").value);
+        return acc + (isNaN(v) ? 0 : v);
+      }, 0);
+
+    const ti = _sum(incomeContainer.children);
+    const ts = _sum(spendingContainer.children);
+    document.getElementById("total-income").textContent = ti.toFixed(2);
+    document.getElementById("total-spending").textContent = ts.toFixed(2);
+    const net = ti - ts;
+    const asset = document.getElementById("asset-display");
+    asset.textContent = "$" + net.toFixed(2);
+    asset.className = "asset " + (net > 0 ? "asset-positive" : net < 0 ? "asset-negative" : "asset-zero");
+  }
+
+  function updateSubmitAvailability() {
+    submitBtn.disabled = (incomeContainer.children.length === 0 && spendingContainer.children.length === 0);
+  }
+
+  function validateInputs() {
+    let ok = true;
+    Array.from(document.querySelectorAll(".input-row")).forEach((row) => {
+      const cat = row.querySelector(".entry-category");
+      const amt = row.querySelector(".entry-amount");
+      cat.classList.remove("error-border");
+      amt.classList.remove("error-border");
+      if (!cat.value || !amt.value || parseFloat(amt.value) <= 0) {
+        cat.classList.add("error-border");
+        amt.classList.add("error-border");
+        ok = false;
+      }
+    });
+    return ok;
+  }
+
+  function createRow(type) {
+    hasUnsavedData = true;
+    const container = type === "income" ? incomeContainer : spendingContainer;
+    const row = document.createElement("div");
+    row.className = "input-row";
+    const cat = document.createElement("select");
+    cat.className = "entry-category";
+    cat.innerHTML = `<option value="">Select Category</option>`;
+
+    const categories = {
+      income: ["Job", "Stock", "Fund", "Interest", "Gift", "Rental", "Bonus", "Other"],
+      spending: ["Transport", "Food", "Clothes", "Entertainment", "Medical", "Education", "Rent", "Subscription", "Utilities", "Other"]
+    }[type];
+
+    categories.forEach(c => {
+      const o = document.createElement("option");
+      o.value = c; o.textContent = c;
+      cat.append(o);
+    });
+
+    const amt = document.createElement("input");
+    amt.type = "number";
+    amt.min = 0.01;
+    amt.step = 0.01;
+    amt.placeholder = "Amount";
+    amt.className = "entry-amount";
+    amt.addEventListener("input", () => {
+      hasUnsavedData = true;
+      updateTotalsLive();
+    });
+
+    const note = document.createElement("input");
+    note.type = "text";
+    note.placeholder = "Note";
+    note.className = "entry-note";
+    note.addEventListener("input", () => {
+      hasUnsavedData = true;
+    });
+
+    const del = document.createElement("button");
+    del.className = "delete-btn";
+    del.textContent = "Delete";
+    del.addEventListener("click", () => {
+      row.remove();
+      hasUnsavedData = true;
+      updateTotalsLive();
+      updateSubmitAvailability();
+    });
+
+    [cat, amt, note, del].forEach(el => row.appendChild(el));
+    container.appendChild(row);
+    updateSubmitAvailability();
+  }
+
+  function collectDataAndStore() {
+    const entries = ["income", "spending"].flatMap(type =>
+      Array.from(document.getElementById(type + "-rows").children)
+        .map(r => ({
+          category: r.querySelector(".entry-category").value,
+          amount: parseFloat(r.querySelector(".entry-amount").value),
+          note: r.querySelector(".entry-note").value.trim(),
+          type
+        }))
+    );
+
+    const totalIncome = entries.filter(e => e.type === "income").reduce((a, b) => a + b.amount, 0);
+    const totalSpending = entries.filter(e => e.type === "spending").reduce((a, b) => a + b.amount, 0);
+    const net = totalIncome - totalSpending;
+    const history = JSON.parse(localStorage.getItem("visualBudgetHistory") || "[]");
+
+    history.push({
+      date: dateInput.value,
+      user: "John Doe",
+      entries, totalIncome, totalSpending, net
+    });
+
+    localStorage.setItem("visualBudgetHistory", JSON.stringify(history));
+  }
+
+  incomeBtn.addEventListener("click", () => createRow("income"));
+  spendingBtn.addEventListener("click", () => createRow("spending"));
+
+  submitBtn.addEventListener("click", () => {
+    if (!dateInput.value) {
+      showError("Please select the date.");
+      return;
+    }
+    if (incomeContainer.children.length === 0 && spendingContainer.children.length === 0) {
+      showError("You haven't added any record yet.");
+      return;
+    }
+    if (!validateInputs()) {
+      showError("Please fill in all categories and valid amounts.");
+      return;
+    }
+    collectDataAndStore();
+    hasUnsavedData = false;
+    dateManuallyChanged = false;  // Reset manual change flag on submit
+    incomeContainer.innerHTML = "";
+    spendingContainer.innerHTML = "";
+    updateTotalsLive();
+    updateSubmitAvailability();
+
+    showSuccess("Data submitted successfully!");
+  });
+
+  // Helper function to determine if there is real unsaved data
+  function hasRealUnsavedData() {
+    // Return true if there is unsaved data (input rows added/modified) or user changed date manually
+    return hasUnsavedData || dateManuallyChanged;
+  }
+
+  document.getElementById("history-btn").addEventListener("click", (e) => {
+    if (hasRealUnsavedData()) {
+      e.preventDefault();
+      showError("There is unsaved data. Please submit first.");
+    } else {
+      window.location.href = "history.html";
+    }
+  });
+
+  document.getElementById("visualize-btn").addEventListener("click", (e) => {
+    if (hasRealUnsavedData()) {
+      e.preventDefault();
+      showError("There is unsaved data. Please submit first.");
+    } else {
+      window.location.href = "dashboard.html";
+    }
+  });
+
+  updateTotalsLive();
+  updateSubmitAvailability();
+});
