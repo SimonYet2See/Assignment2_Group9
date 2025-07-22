@@ -370,6 +370,12 @@ body {
   position: relative;      /* for positioning inner elements */
 }
 
+.error-row {
+  border: 2px solid red;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 /* Header stays fixed on top */
 .header {
   font-style: italic;
@@ -626,4 +632,226 @@ body.auth-body {
 /* Show contact list when toggled */
 .contact-list.visible {
   display: block;
+}
+
+
+.error-border {
+  border: 2px solid red !important;
+}
+#entry-date {
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+
+/*dashboard*/
+#dashboard-page {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+}
+
+#dashboard-page .dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HEADER layout */
+#dashboard-page .dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #344362;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* BUTTON container */
+#dashboard-page .edit-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+/* Buttons styling */
+#dashboard-page .edit-btn {
+  background-color: white;
+  color: #344362;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 180px;   /* Fixed same width for both */
+  text-align: center;
+}
+
+#dashboard-page .edit-btn:hover {
+  background-color: #e0e0e0;
+}
+
+
+#dashboard-page .filters {
+  margin: 20px 0;
+  background-color: rgb(255, 254, 254);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#dashboard-page .filter-group {
+  margin-bottom: 15px;
+}
+
+#dashboard-page .filter-group label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#dashboard-page .filter-group input {
+  padding: 6px;
+}
+
+#dashboard-page .dashboard-charts h2 {
+  margin-top: 40px;
+  color: #333;
+}
+
+#dashboard-page .chart-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#dashboard-page canvas {
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+/*History*/
+/* Default button styling */
+.button {
+  background-color: white;
+  color: #344362;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: rgb(165, 163, 163);
+}
+
+.small-button {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+
+/* Scoped to the history page only */
+#history-page .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color:#344362;
+  color: white;
+  position: relative;
+}
+
+#history-page .logo {
+  font-size: 2rem;
+  margin: 0;
+}
+
+#history-page .nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#history-page .nav-buttons a {
+  width: 140px;
+  text-align: center;
+}
+
+#history-page .container {
+  padding: 20px;
+}
+
+#history-page .table-container {
+  overflow-x: auto;
+}
+
+#history-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#history-page th,
+#history-page td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#history-page th {
+  background-color: #f2f2f2;
+}
+
+#history-page tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#history-page tr:hover {
+  background-color: #f1f1f1;
+}
+
+#history-page .search-container {
+  margin-bottom: 10px;
+}
+
+#history-page input[type="text"] {
+  padding: 6px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#history-page .recall {
+  background-color: #007BFF;
+  margin-top: 10px;
+}
+
+#history-page .recall:hover {
+  background-color: #0056b3;
+}
+
+#error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
 }
