@@ -1,0 +1,857 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header h1 a, .login-body h1 a {
+  font-style: italic;
+  font-size: 2rem;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  z-index: 2;
+}
+
+.main-home ,.login-body{
+  background: url('images/index_bg.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+/*box of index*/
+.welcome-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.btn {
+  background-color: #00aaff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+.footer {
+  background-color: #344362;
+  color: white; /* Corrected from font-color */
+  font-family: Georgia, serif; /* Corrected from font-style */
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.contact-list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.contact-list.visible {
+  display: block;
+}
+
+/* Login Page */
+
+
+.login-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.login-container h2 {
+  margin-bottom: 1.5 rem;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+}
+
+/*login*/
+/* Updated green Get Started button */
+.btn {
+  background-color: #28a745; /* green */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  display: inline-block;
+  font-weight: bold;
+}
+
+/* Login Page Styling */
+.login-body {
+  background-color: #d0ebff; /* light blue background */
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.login-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-container {
+  background-color: white;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  width: 300px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3e5a78;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #3d546e;
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.signup-link a {
+  color: #344a61;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+/*sign-up page*/
+.auth-body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('images/index_bg.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.form-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-form {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  width: 100%;
+  max-width: 500px;
+}
+
+.auth-form h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #344362;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #344362;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.btn:hover {
+  background-color: #2b3a55;
+}
+
+/*data input*/
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Summary Section */
+.summary {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.summary h2,
+.summary h3 {
+  margin: 5px 0;
+}
+
+.asset {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.asset-positive {
+  color: green;
+}
+
+.asset-negative {
+  color: red;
+}
+
+.asset-zero {
+  color: #555;
+}
+
+/* Section wrapper */
+.section {
+  margin-bottom: 40px;
+}
+
+/* Action buttons (Add Income/Spending) */
+.action-buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.action-buttons .btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Input rows for entries */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin: 10px auto;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+}
+
+/* Inputs inside input-row */
+.input-row select,
+.input-row input[type="number"],
+.input-row input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+/* OK and Delete buttons */
+.ok-btn, .delete-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ok-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Bottom Submit and Visualize buttons */
+/* Make container wider and centered */
+.container {
+  max-width: 1200px;       /* wider than before */
+  margin: 100px auto 30px; /* lower from top with more space */
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px 40px 30px; /* more side padding */
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  position: relative;      /* for positioning inner elements */
+}
+
+.error-row {
+  border: 2px solid red;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Header stays fixed on top */
+.header {
+  font-style: italic;
+  font-size: 2rem;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: white;
+  z-index: 10;
+  background: transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Bottom buttons container: fixed width, centered, aligned */
+.bottom-buttons {
+  width: 100%;              /* full container width */
+  max-width: 500px;         /* restrict width */
+  margin: 30px auto 0;      /* centered horizontally, margin top */
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  position: sticky;         /* sticks when scrolling, optional */
+  bottom: 10px;             /* if sticky used, stays near bottom */
+  background: white;        /* to avoid overlap */
+  padding: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+  z-index: 5;
+}
+
+/* Buttons smaller and responsive */
+.bottom-buttons .btn {
+  flex: 1 1 45%;          /* take about half width each with some flexibility */
+  background-color: #6c757d;
+  color: white;
+  padding: 8px 0;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+/* Make sure inputs inside .container expand well */
+.container input,
+.container select,
+.container textarea {
+  width: 100%;           /* full width inputs */
+  max-width: 100%;       /* prevent overflow */
+  box-sizing: border-box;
+}
+
+/* Optional: Increase width of entry rows */
+.entry-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Style entry inputs */
+.entry-row select,
+.entry-row input,
+.entry-row textarea {
+  flex: 1 1 30%;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Textarea for notes */
+.entry-row textarea {
+  flex: 1 1 100%;
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Dashboard Styles */
+/* Container for filters */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Each filter group */
+.filter-group {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Select and input inside filters */
+.filters select,
+.filters input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* Dashboard section layout */
+.dashboard-section {
+  margin-bottom: 2rem;
+}
+
+.dashboard-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+/* Chart grid: 2-3 per row */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Chart cards */
+.chart-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Bottom navigation bar */
+.bottom-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.bottom-nav a {
+  padding: 0.7rem 1.5rem;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.bottom-nav a:hover {
+  background-color: #0b5ed7;
+}
+
+/*History */
+/* Table & Search */
+.search-container {
+  margin: 1rem 0;
+  text-align: center;
+}
+.search-container input {
+  padding: 0.5rem;
+  width: 60%;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+thead {
+  background-color: #f5f5f5;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.small-button {
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.recall {
+  margin-top: 1rem;
+  background-color: #3498db;
+  color: white;
+}
+
+/* Ensure html and body take full height and no margin */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Make body a flex column so footer can stick at bottom */
+body.auth-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Container should take remaining space above footer */
+.container {
+  flex: 1 0 auto;
+}
+
+/* Footer styling and prevent shrinking */
+.footer {
+  flex-shrink: 0;
+  background-color: #344362;
+  color: white;
+  font-family: Georgia, serif;
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+/* Contact list hidden by default */
+.contact-list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+/* Show contact list when toggled */
+.contact-list.visible {
+  display: block;
+}
+
+
+.error-border {
+  border: 2px solid red !important;
+}
+#entry-date {
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+
+/*dashboard*/
+#dashboard-page {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+}
+
+#dashboard-page .dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HEADER layout */
+#dashboard-page .dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #344362;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* BUTTON container */
+#dashboard-page .edit-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+/* Buttons styling */
+#dashboard-page .edit-btn {
+  background-color: white;
+  color: #344362;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  width: 180px;   /* Fixed same width for both */
+  text-align: center;
+}
+
+#dashboard-page .edit-btn:hover {
+  background-color: #e0e0e0;
+}
+
+
+#dashboard-page .filters {
+  margin: 20px 0;
+  background-color: rgb(255, 254, 254);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#dashboard-page .filter-group {
+  margin-bottom: 15px;
+}
+
+#dashboard-page .filter-group label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#dashboard-page .filter-group input {
+  padding: 6px;
+}
+
+#dashboard-page .dashboard-charts h2 {
+  margin-top: 40px;
+  color: #333;
+}
+
+#dashboard-page .chart-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#dashboard-page canvas {
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+/*History*/
+/* Default button styling */
+.button {
+  background-color: white;
+  color: #344362;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: rgb(165, 163, 163);
+}
+
+.small-button {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+}
+
+/* Scoped to the history page only */
+#history-page .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  background-color:#344362;
+  color: white;
+  position: relative;
+}
+
+#history-page .logo {
+  font-size: 2rem;
+  margin: 0;
+}
+
+#history-page .nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#history-page .nav-buttons a {
+  width: 140px;
+  text-align: center;
+}
+
+#history-page .container {
+  padding: 20px;
+}
+
+#history-page .table-container {
+  overflow-x: auto;
+}
+
+#history-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#history-page th,
+#history-page td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#history-page th {
+  background-color: #f2f2f2;
+}
+
+#history-page tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#history-page tr:hover {
+  background-color: #f1f1f1;
+}
+
+#history-page .search-container {
+  margin-bottom: 10px;
+}
+
+#history-page input[type="text"] {
+  padding: 6px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#history-page .recall {
+  background-color: #007BFF;
+  margin-top: 10px;
+}
+
+#history-page .recall:hover {
+  background-color: #0056b3;
+}
+
+#error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+}

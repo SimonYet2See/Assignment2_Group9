@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financial Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    function toggleContacts() {
+      const contactList = document.getElementById('contact-list');
+      contactList.classList.toggle('visible');
+    }
+  </script>
+
+</head>
+<body id="dashboard-page">
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>My Financial Dashboard</h1>
+      <div class="edit-btn-group">
+        <a href="data_input.html" class="edit-btn">Insert Data</a>
+        <a href="history.html" class="edit-btn">Edit/View History Data</a>
+      </div>
+    </header>
+
+    <div class="filters">
+        <div class="filter-group">
+          <label for="date-range">Date Range:</label>
+          <input type="date" id="start-date" name="start-date">
+          <input type="date" id="end-date" name="end-date">
+        </div>
+      
+
+    
+    </div>
+    
+    <main class="dashboard-charts">
+      <h2>Income Overview</h2>
+      <div class="chart-row">
+        <canvas id="incomePieChart"></canvas>
+        <canvas id="incomeLastMonthPieChart"></canvas>
+        <canvas id="incomeBarChart"></canvas>
+      </div>
+
+      <h2>Spending Overview</h2>
+      <div class="chart-row">
+        <canvas id="spendingPieChart"></canvas>
+        <canvas id="spendingLastMonthPieChart"></canvas>
+        <canvas id="spendingBarChart"></canvas>
+      </div>
+
+      <h2>Income vs Spending Trends</h2>
+      <div class="chart-row">
+        <canvas id="incomeVsSpendingTrendChart"></canvas>
+        <canvas id="categoryTrendChart"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+
+<footer class="footer">
+  <button onclick="toggleContacts()">Contact Us</button>
+  <ul id="contact-list" class="contact-list">
+    <li><strong>Jessy Seo</strong> — seo00029@algonquinlive.com</li>
+    <li><strong>Yuanyuan Xi</strong> — xi000016@algonquinlive.com</li>
+    <li><strong>Kang Tian</strong> — tian0063@algonquinlive.com</li>
+  </ul>
+</footer>
+
+</html>
