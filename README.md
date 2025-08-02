@@ -7,4 +7,4 @@
 
 # Project Architecture
 <img align="right" max-width="100%" src="https://raw.githubusercontent.com/JessySeo9955/Assignment2_Group9/main/.github/images/mvc.png" />
-<img align="right" max-width="100%" src="https://raw.githubusercontent.com/JessySeo9955/Assignment2_Group9/main/.github/images/mvc/data_flow.png" />
+<img align="right" max-width="100%" src="https://raw.githubusercontent.com/JessySeo9955/Assignment2_Group9/main/.github/images/data_flow.png" />
