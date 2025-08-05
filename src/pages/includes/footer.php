@@ -1,4 +1,11 @@
-  <footer class="footer">
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: footer.php
+Date: 2025-08-05
+Description: site common footer included file -->
+
+<footer class="footer">
     <button onclick="toggleContacts()">Contact Us</button>
     <ul id="contact-list" class="contact-list">
       <li><strong>Jessy Seo</strong> — seo00029@algonquinlive.com</li>

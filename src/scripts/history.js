@@ -1,3 +1,10 @@
+    // Name: Jihee Seo
+// Assignment 2
+
+// File Name: history.js
+// Date: 2025-08-05
+// Description: history javascript to render data, edit and delete each budget
+    
     const historyBody = document.getElementById("historyBody");
     const searchInput = document.getElementById("searchInput");
     let deletedItems = [];

@@ -1,4 +1,11 @@
 
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: index.php
+Date: 2025-08-05
+Description: home page  -->
+
 <?php
   $pageTitle = "VisualBudget - Personal Finance Tracker";
   require_once './includes/header.php';

@@ -1,4 +1,11 @@
 
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: data_input.php
+Date: 2025-08-05
+Description: budget creattion page  -->
+
 <?php
   $pageTitle = "Data Input - VisualBudget";
   $script = ["../scripts/budget/data_input.js", "../scripts/budget/budget.js"];

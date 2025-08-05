@@ -1,3 +1,11 @@
+
+// Name: Jihee Seo, Yuanyuan Xi
+// Assignment 2
+
+// File Name: common.js
+// Date: 2025-08-05
+// Description: common functions across project
+
 function toggleContacts() {
     const contactList = document.getElementById("contact-list");
     contactList.classList.toggle("visible");
