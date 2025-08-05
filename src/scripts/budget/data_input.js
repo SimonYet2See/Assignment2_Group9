@@ -1,4 +1,11 @@
 
+// Name: Yuanyuan Xi
+// Assignment 2
+
+// File Name: buget/data_input.js
+// Date: 2025-08-05
+// Description: budget javascript to manage user interactions 
+
 let successBanner;
  let errorBanner;
  

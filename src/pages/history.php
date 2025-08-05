@@ -1,3 +1,10 @@
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: hitosry.php
+Date: 2025-08-05
+Description: budget history page  -->
+
 <?php
   $pageTitle = "History - My Finance Tracker";
   $script = ["../scripts/history.js"];

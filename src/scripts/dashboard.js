@@ -1,3 +1,11 @@
+
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: dashboard.js
+// Date: 2025-08-05
+// Description: dashboard javascript to render charts
+
 const incomeCategories = ["Job", "Stock", "Fund", "Interest", "Gift", "Rental", "Bonus", "Other"];
 
 const spendingCategories = ["Transport", "Food", "Clothes", "Entertainment", "Medical", "Education", "Rent", "Subscription", "Utilities", "Other"];

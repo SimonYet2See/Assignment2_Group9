@@ -1,6 +1,12 @@
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: header.php
+Date: 2025-08-05
+Description: site common header included file -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
   <meta charset="UTF-8" />

@@ -1,3 +1,10 @@
+    // Name: Jihee Seo
+// Assignment 2
+
+// File Name: login.js
+// Date: 2025-08-05
+// Description: login javascript to signin
+
 
 document.getElementById("submitBtn").addEventListener("click", function () {
     // Collect the form data

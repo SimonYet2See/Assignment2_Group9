@@ -1,3 +1,10 @@
+    // Name: Jihee Seo
+// Assignment 2
+
+// File Name: login.js
+// Date: 2025-08-05
+// Description: login javascript to signup
+
 function validateForm() {
     const pw1 = document.getElementById("password").value;
     const pw2 = document.getElementById("confirm-password").value;

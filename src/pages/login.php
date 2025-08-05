@@ -1,3 +1,10 @@
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: signin.php
+Date: 2025-08-05
+Description: signin page  -->
+
 <?php
   $pageTitle = "Login - VisualBudget";
   $script = "../scripts/login.js";

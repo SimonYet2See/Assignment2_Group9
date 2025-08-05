@@ -1,3 +1,11 @@
+
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: buget/budget.js
+// Date: 2025-08-05
+// Description: budget javascript to communicate with server and render data
+
 function savaBudgetToDatabase() {
     const incomeSelector = "#income-rows .input-row";
     const spendingSelector = "#spending-rows .input-row";

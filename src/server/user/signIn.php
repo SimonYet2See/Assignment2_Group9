@@ -1,3 +1,10 @@
+<!-- Name: Jihee Seo
+Assignment 2
+
+File Name: signin.php
+Date: 2025-08-05
+Description: user signin controller -->
+
 <?php
 require_once __DIR__ . '/../db/conn.php';
 

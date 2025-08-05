@@ -1,3 +1,10 @@
+<!-- Name: Jihee Seo, Yuanyuan Xi
+Assignment 2
+
+File Name: signup.php
+Date: 2025-08-05
+Description: signup page  -->
+
 <?php
   $pageTitle = "Sign Up - VisualBudget";
   $script = "../scripts/signup.js";
