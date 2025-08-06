@@ -1,11 +1,11 @@
-<!-- Name: Jihee Seo
-Assignment 2
-
-File Name: create.php
-Date: 2025-08-05
-Description: user create controller -->
-
 <?php
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: create.php
+// Date: 2025-08-05
+// Description: user create controller
+
 require_once __DIR__ . '/../db/conn.php';
 
 $response = ['success' => false, 'message' => ''];

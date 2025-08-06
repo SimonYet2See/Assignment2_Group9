@@ -1,12 +1,13 @@
-
-<!-- Name: Jihee Seo
-Assignment 2
-
-File Name: create.php
-Date: 2025-08-05
-Description: budget create controller -->
-
 <?php
+
+
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: create.php
+// Date: 2025-08-05
+// Description: budget create controller
+
 require_once __DIR__ . '/../db/conn.php';
 
 session_start();

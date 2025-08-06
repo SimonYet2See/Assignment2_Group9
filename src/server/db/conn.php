@@ -1,11 +1,12 @@
-<!-- Name: Jihee Seo
-Assignment 2
-
-File Name: db.php
-Date: 2025-08-05
-Description: config for db connection and make pdo instance -->
-
 <?php
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: db.php
+// Date: 2025-08-05
+// Description: config for db connection and make pdo instance
+
+
     $host ='localhost';
     $db ='assignment2';
     $user = 'root';
