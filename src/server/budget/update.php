@@ -1,11 +1,12 @@
-<!-- Name: Jihee Seo
-Assignment 2
-
-File Name: read.php
-Date: 2025-08-05
-Description: budget update controller -->
-
 <?php
+
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: read.php
+// Date: 2025-08-05
+// Description: budget update controller
+
 require_once __DIR__ . '/../db/conn.php';
 
 session_start();

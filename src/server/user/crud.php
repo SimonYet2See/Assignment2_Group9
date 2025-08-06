@@ -1,11 +1,11 @@
-<!-- Name: Jihee Seo
-Assignment 2
-
-File Name: crud.php
-Date: 2025-08-05
-Description: user model to commnuticate to database -->
-
 <?php
+// Name: Jihee Seo
+// Assignment 2
+
+// File Name: crud.php
+// Date: 2025-08-05
+// Description: user model to commnuticate to database
+
     class userCrud {
         private $db;
 
